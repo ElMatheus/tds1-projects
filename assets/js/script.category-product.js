@@ -9,12 +9,27 @@ class Category {
     }
 }
 
-class Product{
-    constructor(id,name,price,category) {
+class Product {
+    constructor(id, name, price, category) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
+    }
+}
+
+class ProductService {
+    constructor() {
+        this.products = [];
+        this.nextProductId = 1;
+    };
+
+    addProducts(name, price, category) {
+        const id = this.nextProductId;
+        this.nextProductId++;
+
+        const product = new Product(id, name);
+        this.products.push(product);
     }
 }
 
@@ -24,7 +39,7 @@ class CategoryService {
         this.nextCategoryId = 1;
     }
 
-    addCategory(name){
+    addCategory(name) {
         const id = this.nextCategoryId;
         this.nextCategoryId++;
 
