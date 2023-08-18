@@ -34,13 +34,13 @@ class CategoryService {
     }
 
     // R => Read
-    getCategoryById(id){
+    getCategoryById(id) {
         return this.categories.find((category) => category.id == id)
     }
 
     // U => Update
 
-    updateCategory(id, name){
+    updateCategory(id, name) {
         const category = this.getCategoryById(id);
         category.name = name;
     }
@@ -56,11 +56,12 @@ class ProductService {
         const id = this.nextProductId;
         this.nextProductId++;
 
-        const product = new Product(id, name,price,category);
+        const product = new Product(id, name, price, category);
 
         this.products.push(product);
         category.products.push(product);
     }
+
 }
 
 
@@ -81,14 +82,20 @@ function createCategory() {
 function createProduct() {
     const productName = 'Choco';
     const productPrice = 0.5;
-    const productCategory = categoriesList.categories[0]; 
+    const productCategory = categoriesList.categories[0];
 
     productsList.addProducts(productName, productPrice, productCategory);
 
     console.log(productsList.products);
 }
 
-function findCategory(id){
+function findCategory(id) {
     const category = categoriesList.getCategoryById(id);
     console.log(category.name);
+
+}
+function editCategory(id, name) {
+    categoriesList.updateCategory(id, name);
+
+    console.log(categoriesList.categories);
 }
