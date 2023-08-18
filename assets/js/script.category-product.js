@@ -88,6 +88,7 @@ function createCategory() {
     const categoryName = document.getElementById('categoryNameInput').value;
 
     categoriesList.addCategory(categoryName);
+    displayCategories();
     cleanFields();
     
 }
@@ -117,6 +118,17 @@ function findCategory(id) {
     console.log(category.name);
 
 }
+
+function displayCategories() {
+    let html = '';
+    categoriesList.categories.forEach(category => {
+        html += `
+        <li>${category.name}</li>
+        `;
+    });
+    document.getElementById('categoriesList').innerHTML = html;
+}
+
 function editCategory(id, name) {
     categoriesList.updateCategory(id, name);
 
