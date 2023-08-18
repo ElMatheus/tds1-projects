@@ -9,19 +9,15 @@
 </head>
 
 <body>
-    <div>
-        <h2>Categorias</h2>
-        <button onclick="createCategory()">Criar categoria</button>
-        <button onclick="findCategory(1)">Encontrar categoria</button>
-        <button onclick="editCategory(1, 'Doces')">Atualizar categoria</button>
-        <button onclick="deleteCategory(2)">Deletar categoria</button>
-    </div>
+    <div id="container">
+        <h1>🛍️Categorias & Produtos</h1>
 
-    <div>
-        <h2>Produtos</h2>
-        <button onclick="createProduct()">Criar produto</button>
-        <button onclick="findProduct(1)">Encontrar produto</button>
-
+        <div class="form-container">
+            <h2>📁Criar Categorias</h2>
+            <label for="">Nome da categoria:</label>
+            <input type="text" required>
+            <button class="btn">Criar Categoria</button>
+        </div>
     </div>
     <script src="../assets/js/script.category-product.js"></script>
 </body>
