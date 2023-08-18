@@ -31,6 +31,8 @@ class CategoryService {
 
         const category = new Category(id, name);
         this.categories.push(category);
+
+        console.log(categoriesList.categories);
     }
 
     // R => Read
@@ -83,14 +85,11 @@ const categoriesList = new CategoryService();
 const productsList = new ProductService();
 
 function createCategory() {
-    const categoryName1 = 'Candies';
-    const categoryName2 = 'Shoes';
-    const categoryName3 = 'Books';
+    const categoryName = document.getElementById('categoryNameInput').value;
 
-    categoriesList.addCategory(categoryName1);
-    categoriesList.addCategory(categoryName2);
-    categoriesList.addCategory(categoryName3);
-    console.log('Categorias criadas');
+    categoriesList.addCategory(categoryName);
+    cleanFields();
+    
 }
 
 function createProduct() {
@@ -134,4 +133,8 @@ function findProduct(id) {
     const product = productsList.getProductById(id);
 
     console.log(product);
+}
+
+function cleanFields(){
+    document.getElementById('categoryNameInput').value = '';
 }
