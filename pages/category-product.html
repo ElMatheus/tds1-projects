@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/style.category-product.css">
     <title>Document</title>
 </head>
+
 <body>
-    <button onclick="createCategory()">Criar categoria</button>
-    <button onclick="createProduct()">Criar produto</button>
-    <button onclick="findCategory(1)">Encontrar categoria</button>
-    <button onclick="editCategory(1, 'Doces')">Editar</button>
-    <button onclick="deleteCategory(2)">Deletar categoria</button>
+    <div>
+        <h2>Categorias</h2>
+        <button onclick="createCategory()">Criar categoria</button>
+        <button onclick="findCategory(1)">Encontrar categoria</button>
+        <button onclick="editCategory(1, 'Doces')">Atualizar categoria</button>
+        <button onclick="deleteCategory(2)">Deletar categoria</button>
+    </div>
+
+    <div>
+        <h2>Produtos</h2>
+        <button onclick="createProduct()">Criar produto</button>
+        <button onclick="findProduct(1)">Encontrar produto</button>
+
+    </div>
     <script src="../assets/js/script.category-product.js"></script>
 </body>
+
 </html>

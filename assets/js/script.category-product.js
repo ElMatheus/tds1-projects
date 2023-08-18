@@ -94,11 +94,21 @@ function createCategory() {
 }
 
 function createProduct() {
-    const productName = 'Choco';
-    const productPrice = 0.5;
-    const productCategory = categoriesList.categories[0];
+    const productName1 = 'Choco';
+    const productPrice1 = 0.5;
+    const productCategory1 = categoriesList.categories[0];
 
-    productsList.addProducts(productName, productPrice, productCategory);
+    const productName2 = 'Sneakers';
+    const productPrice2 = 100;
+    const productCategory2 = categoriesList.categories[1];
+
+    const productName3 = 'Harry Potter';
+    const productPrice3 = 50;
+    const productCategory3 = categoriesList.categories[2];
+
+    productsList.addProducts(productName1, productPrice1, productCategory1);
+    productsList.addProducts(productName2, productPrice2, productCategory2);
+    productsList.addProducts(productName3, productPrice3, productCategory3);
 
     console.log(productsList.products);
 }
@@ -118,4 +128,10 @@ function deleteCategory(id) {
     categoriesList.deleteCategory(id);
 
     console.log(categoriesList.categories);
+}
+
+function findProduct(id) {
+    const product = productsList.getProductById(id);
+
+    console.log(product);
 }
