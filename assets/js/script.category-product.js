@@ -68,7 +68,7 @@ function createCategory() {
     categoriesList.addCategory(categoryName1);
     categoriesList.addCategory(categoryName2);
     categoriesList.addCategory(categoryName3);
-    console.log(categoriesList.categories);
+    console.log('Categorias criadas');
 }
 
 function createProduct() {
@@ -79,4 +79,9 @@ function createProduct() {
     productsList.addProducts(productName, productPrice, productCategory);
 
     console.log(productsList.products);
+}
+
+function findCategory(id){
+    const category = categoriesList.getCategoryById(id);
+    console.log(category.name);
 }
