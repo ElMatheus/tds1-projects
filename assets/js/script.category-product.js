@@ -44,9 +44,9 @@ class CategoryService {
         const category = this.getCategoryById(id);
         category.name = name;
     }
-    
+
     // D => Delete
-    deleteCategory(id){
+    deleteCategory(id) {
         const category = this.getCategoryById(id);
         const index = this.categories.indexOf(category);
 
@@ -68,6 +68,12 @@ class ProductService {
 
         this.products.push(product);
         category.products.push(product);
+
+    }
+    // R => Read
+
+    getProductById(id) {
+        return this.products.find((product) => product.id == id);
     }
 
 }
