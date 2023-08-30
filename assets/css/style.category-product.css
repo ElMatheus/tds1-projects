@@ -87,3 +87,16 @@ h2 {
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+
+.controls {
+    float: right;
+}
+
+.controls i {
+    margin: 0px 0.3125rem;
+    cursor: pointer;
+}
+
+.controls i:nth-child(2) {
+    margin-right: 0px;
+}

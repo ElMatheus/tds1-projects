@@ -1,6 +1,8 @@
 // Cada Categoria posui vários produtos
 // Cada Produto é pertencente a uma Categoria
 
+let editing = -1;
+
 class Category {
     constructor(id, name) {
         this.id = id;
@@ -26,13 +28,19 @@ class CategoryService {
     // CRUD => Create, Read, Update, Delete
     // C => Create
     addCategory(name) {
-        const id = this.nextCategoryId;
-        this.nextCategoryId++;
+        if(editing > 0){
+            this.getCategoryById(editing).name = name;
+            editing = -1;
+        } else {
 
-        const category = new Category(id, name);
-        this.categories.push(category);
-
-        console.log(categoriesList.categories);
+            const id = this.nextCategoryId;
+            this.nextCategoryId++;
+            
+            const category = new Category(id, name);
+            this.categories.push(category);
+            
+            console.log(categoriesList.categories);
+        }
     }
 
     // R => Read
@@ -123,20 +131,23 @@ function displayCategories() {
     let html = '';
     categoriesList.categories.forEach(category => {
         html += `
-        <li>${category.name}</li>
+        <li><span>${category.name}</span><div class="controls"><i onclick="editCategory(${category.id},'${category.name}')" class="fa-solid fa-pen" style="color: #363636;"></i><i onclick="deleteCategory(${category.id})" class="fa-solid fa-trash" style="color: #fd1b1b;"></i></div></li>
         `;
     });
     document.getElementById('categoriesList').innerHTML = html;
 }
 
 function editCategory(id, name) {
+    document.getElementById('categoryNameInput').value = name;
+    editing = id;
     categoriesList.updateCategory(id, name);
-
+    displayCategories();
     console.log(categoriesList.categories);
 }
 
 function deleteCategory(id) {
     categoriesList.deleteCategory(id);
+    displayCategories();
 
     console.log(categoriesList.categories);
 }
