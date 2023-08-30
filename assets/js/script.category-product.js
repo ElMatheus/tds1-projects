@@ -102,6 +102,9 @@ function createCategory() {
 }
 
 function createProduct() {
+    
+
+
     const productName1 = 'Choco';
     const productPrice1 = 0.5;
     const productCategory1 = categoriesList.categories[0];
@@ -131,10 +134,30 @@ function displayCategories() {
     let html = '';
     categoriesList.categories.forEach(category => {
         html += `
-        <li><span>${category.name}</span><div class="controls"><i onclick="editCategory(${category.id},'${category.name}')" class="fa-solid fa-pen" style="color: #363636;"></i><i onclick="deleteCategory(${category.id})" class="fa-solid fa-trash" style="color: #fd1b1b;"></i></div></li>
+        <li>
+            <span>${category.name}</span>
+            <div class="controls">
+                <i onclick="showCreateProductArea(${category.id})" class="fa-solid fa-plus"></i>
+                <i onclick="editCategory(${category.id},'${category.name}')" class="fa-solid fa-pen"></i>
+                <i onclick="deleteCategory(${category.id})" class="fa-solid fa-trash"></i>
+            </div>
+            <ul id="productsOnCategory">
+            </ul>
+            <div id="productsArea-${category.id}" class="hidden">
+                <h2>Criar Produtos</h2>
+                <input type="text" id="productNameInput" placeholder="Nome do Produto">
+                <button class="btn" id="green" onclick="createProduct()">Criar Produto</button>
+            </div>
+        
+        </li>
         `;
     });
     document.getElementById('categoriesList').innerHTML = html;
+}
+
+function showCreateProductArea(id) {
+    const hiddenDiv = document.getElementById('productsArea-' + id);
+    hiddenDiv.classList.toggle('hidden');
 }
 
 function editCategory(id, name) {
