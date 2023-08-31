@@ -28,17 +28,17 @@ class CategoryService {
     // CRUD => Create, Read, Update, Delete
     // C => Create
     addCategory(name) {
-        if(editing > 0){
+        if (editing > 0) {
             this.getCategoryById(editing).name = name;
             editing = -1;
         } else {
 
             const id = this.nextCategoryId;
             this.nextCategoryId++;
-            
+
             const category = new Category(id, name);
             this.categories.push(category);
-            
+
             console.log(categoriesList.categories);
         }
     }
@@ -98,29 +98,16 @@ function createCategory() {
     categoriesList.addCategory(categoryName);
     displayCategories();
     cleanFields();
-    
+
 }
 
-function createProduct() {
-    
+function createProduct(categoryId) {
 
-
-    const productName1 = 'Choco';
-    const productPrice1 = 0.5;
-    const productCategory1 = categoriesList.categories[0];
-
-    const productName2 = 'Sneakers';
-    const productPrice2 = 100;
-    const productCategory2 = categoriesList.categories[1];
-
-    const productName3 = 'Harry Potter';
-    const productPrice3 = 50;
-    const productCategory3 = categoriesList.categories[2];
-
-    productsList.addProducts(productName1, productPrice1, productCategory1);
-    productsList.addProducts(productName2, productPrice2, productCategory2);
-    productsList.addProducts(productName3, productPrice3, productCategory3);
-
+    const productName = document.getElementById('productNameInput-' + categoryId).value;
+    const productPrice = document.getElementById('productPriceInput-' + categoryId).value;
+    const productCategory = categoriesList.getCategoryById(categoryId);
+    productsList.addProducts(productName, productPrice, productCategory);
+    displayCategories();
     console.log(productsList.products);
 }
 
@@ -142,17 +129,32 @@ function displayCategories() {
                 <i onclick="deleteCategory(${category.id})" class="fa-solid fa-trash"></i>
             </div>
             <ul id="productsOnCategory">
+                ${displayProducts(category.products)}
             </ul>
             <div id="productsArea-${category.id}" class="hidden">
-                <h2>Criar Produtos</h2>
-                <input type="text" id="productNameInput" placeholder="Nome do Produto">
-                <button class="btn" id="green" onclick="createProduct()">Criar Produto</button>
+                <h2>Criar Produto</h2>
+                <input type="text" id="productNameInput-${category.id}" placeholder="Nome do Produto">
+                <input type="number" id="productPriceInput-${category.id}" placeholder="Preço do Produto">
+                <button class="btn" id="green" onclick="createProduct(${category.id})">Criar Produto</button>
             </div>
         
         </li>
         `;
     });
     document.getElementById('categoriesList').innerHTML = html;
+}
+
+function displayProducts(products) {
+    let html = '';
+    products.forEach(product => {
+        html += `
+        <li>
+            <p>${product.name}</p>
+            <p><strong>${product.price}</strong></p>
+        </li>
+        `;
+    });
+    return html;
 }
 
 function showCreateProductArea(id) {
@@ -181,6 +183,7 @@ function findProduct(id) {
     console.log(product);
 }
 
-function cleanFields(){
+function cleanFields() {
     document.getElementById('categoryNameInput').value = '';
 }
+
