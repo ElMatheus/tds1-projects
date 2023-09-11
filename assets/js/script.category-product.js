@@ -28,18 +28,21 @@ class CategoryService {
     // CRUD => Create, Read, Update, Delete
     // C => Create
     addCategory(name) {
-        if (editing > 0) {
-            this.getCategoryById(editing).name = name;
-            editing = -1;
+        if (emptyInput(name) == true) {
+            sendMessageError('message');
         } else {
+            if (editing > 0) {
+                this.getCategoryById(editing).name = name;
+                editing = -1;
+            } else {
+                const id = this.nextCategoryId;
+                this.nextCategoryId++;
 
-            const id = this.nextCategoryId;
-            this.nextCategoryId++;
+                const category = new Category(id, name);
+                this.categories.push(category);
 
-            const category = new Category(id, name);
-            this.categories.push(category);
-
-            console.log(categoriesList.categories);
+                console.log(categoriesList.categories);
+            }
         }
     }
 
@@ -71,13 +74,19 @@ class ProductService {
     };
 
     addProducts(name, price, category) {
-        const id = this.nextProductId;
-        this.nextProductId++;
+        if (emptyInput(name, price) == true) {
+            sendMessageError('message2');
+        } else {
+            const id = this.nextProductId;
+            this.nextProductId++;
 
-        const product = new Product(id, name, price, category);
+            const product = new Product(id, name, price, category);
 
-        this.products.push(product);
-        category.products.push(product);
+            this.products.push(product);
+            category.products.push(product);
+            displayCategories();
+
+        }
 
     }
     // R => Read
@@ -107,8 +116,34 @@ function createProduct(categoryId) {
     const productPrice = document.getElementById('productPriceInput-' + categoryId).value;
     const productCategory = categoriesList.getCategoryById(categoryId);
     productsList.addProducts(productName, productPrice, productCategory);
-    displayCategories();
     console.log(productsList.products);
+}
+
+function sendMessageError(idMsg) {
+    document.getElementById(idMsg).innerHTML = 'O campo não pode estar vazio';
+    document.getElementById(idMsg).classList.add('error');
+
+    setTimeout(() => {
+        document.getElementById(idMsg).innerHTML = '';
+        document.getElementById(idMsg).classList.remove('error');
+    }, 2000);
+}
+
+function emptyInput(input, price) {
+    if (price) {
+        if (input == '' || price == '') {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        if (input == '') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 
 function findCategory(id) {
@@ -136,6 +171,7 @@ function displayCategories() {
                 <input type="text" id="productNameInput-${category.id}" placeholder="Nome do Produto">
                 <input type="number" id="productPriceInput-${category.id}" placeholder="Preço do Produto">
                 <button class="btn" id="green" onclick="createProduct(${category.id})">Criar Produto</button>
+                <p id="message2"></p>
             </div>
         
         </li>

@@ -112,3 +112,9 @@ input {
 #green {
     background-color: green;
 }
+
+.error {
+    color: red;
+    text-align: center;
+}
+
